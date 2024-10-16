@@ -52,33 +52,35 @@ int main() {
             }
         }
 
+        int temp_res = 0;
+        int visit[109][109] = { 0, };
         for (int i = 0; i < k; i++) {
             queue<pair<int, int>>Q;
-            int visit[109][109] = { 0, };
-            int temp_res = 0;
-            Q.push({ start[i].first, start[i].second });
-            visit[start[i].first][start[i].second] = 1;
-            temp_res++;
+            if (visit[start[i].first][start[i].second] == 0) {
+                Q.push({ start[i].first, start[i].second });
+                visit[start[i].first][start[i].second] = 1;
+                temp_res++;
 
-            while (!Q.empty()) {
-                auto cur = Q.front();
-                Q.pop();
-                for (int dir = 0; dir < 4; dir++) {
-                    int nx = cur.first + dx[dir];
-                    int ny = cur.second + dy[dir];
+                while (!Q.empty()) {
+                    auto cur = Q.front();
+                    Q.pop();
+                    for (int dir = 0; dir < 4; dir++) {
+                        int nx = cur.first + dx[dir];
+                        int ny = cur.second + dy[dir];
 
-                    if (nx <= 0 || nx > n || ny <= 0 || ny > n) continue;
-                    if (temp[nx][ny] == 0 && visit[nx][ny] == 0) {
-                        Q.push({ nx, ny });
-                        temp_res++;
-                        visit[nx][ny] = 1;
+                        if (nx <= 0 || nx > n || ny <= 0 || ny > n) continue;
+                        if (temp[nx][ny] == 0 && visit[nx][ny] == 0) {
+                            Q.push({ nx, ny });
+                            temp_res++;
+                            visit[nx][ny] = 1;
+                        }
                     }
                 }
             }
-            res = max(res, temp_res);
 
 
         }
+        res = max(res, temp_res);
 
 
     } while (next_permutation(check.begin(), check.end()));
