@@ -54,8 +54,8 @@ int main() {
                     for (int dir = 0; dir < 4; dir++) {
                         int nx = cur.first + dx[dir];
                         int ny = cur.second + dy[dir];
-                        int diff = abs(cur_h - board[nx][ny]);
                         if (nx <= 0 || nx > n || ny <= 0 || ny > n) continue;
+                        int diff = abs(cur_h - board[nx][ny]);
                         if (visit[nx][ny] == 0) {
                             if (diff >= u && diff <= d) {
                                 visit[nx][ny] = 1;
