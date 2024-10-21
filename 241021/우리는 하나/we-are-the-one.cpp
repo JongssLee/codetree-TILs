@@ -26,7 +26,7 @@ int main() {
     for (int i = 0; i < k; i++) {
         check.push_back(0);
     }
-    for (int i = 0; i < n-k; i++) {
+    for (int i = 0; i < n*n-k; i++) {
         check.push_back(1);
     }
     
