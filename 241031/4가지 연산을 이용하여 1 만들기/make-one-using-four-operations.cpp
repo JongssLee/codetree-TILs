@@ -5,26 +5,48 @@
 #include<queue>
 #include<algorithm>
 using namespace std;
-int dp[1000009] = { 0, };
+int dp[3000009] = { 0, };
+int vs[3000009] = { 0, };
 int main() {
     int n;
     cin >> n;
 
-    dp[1] = 0;
-    dp[2] = 1;
-    dp[3] = 1;
-    for (int i = 4; i <= n; i++) {
-        dp[i] = dp[i - 1] + 1;
-        if (i % 2 == 0) {
-            dp[i] = min(dp[i], dp[i / 2] + 1);
+    queue<pair<int, int>> Q;
+    Q.push({ n,0 });
+    vs[n] = 1;
+    while (!Q.empty()) {
+        int cur = Q.front().first;
+        int dist = Q.front().second;
+        Q.pop();
+        if (cur == 2 || cur == 3) {
+            cout << dist + 1;
+            return 0;
         }
-        if (i % 3 == 0) {
-            dp[i] = min(dp[i], dp[i / 3] + 1);
+        //+1
+        if (cur + 1 < 3000009) {
+            if (vs[cur + 1] == 0) {
+                Q.push({ cur + 1, dist + 1 });
+                vs[cur + 1] = 1;
+            }
+        }
+        if (cur - 1 > 0) {
+            if (vs[cur - 1] == 0) {
+                Q.push({ cur - 1, dist + 1 });
+                vs[cur - 1] = 1;
+            }
+        }
+        if (cur % 2 == 0) {
+            if (vs[cur / 2] == 0) {
+                Q.push({ cur / 2, dist + 1 });
+                vs[cur / 2] = 1;
+            }
+        }
+        if (cur % 3 == 0) {
+            if (vs[cur / 3] == 0) {
+                Q.push({ cur / 3, dist + 1 });
+                vs[cur / 3] = 1;
+            }
         }
     }
-    for (int i = n; i >= 3; i--) {
-        dp[i - 1] = min(dp[i] + 1, dp[i - 1]);
-    }
-    cout << dp[n];
     return 0;
 }
