@@ -19,7 +19,10 @@ int main() {
     startY--;
     goalX--;
     goalY--;
-
+    if(startX==goalX && startY==goalY){
+        cout<<0;
+        return 0;
+    }
     queue<pair<pair<int, int>, int>> Q;
     Q.push({ {startX,startY}, 0 });
     visited[startX][startY] = 1;
