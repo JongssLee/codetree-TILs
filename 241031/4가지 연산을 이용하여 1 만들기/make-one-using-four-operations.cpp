@@ -10,7 +10,10 @@ int vs[3000009] = { 0, };
 int main() {
     int n;
     cin >> n;
-
+    if (n == 1) {
+        cout << 0;
+        return 0;
+    }
     queue<pair<int, int>> Q;
     Q.push({ n,0 });
     vs[n] = 1;
