@@ -14,7 +14,7 @@ int main() {
     int l, s;
     cin>>l>>s;
 
-    int res = 0;
+    long long int res = 0;
 
     for(auto pp:p){
         res+=1;
